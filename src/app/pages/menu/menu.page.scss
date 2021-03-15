@@ -1,0 +1,30 @@
+.men{
+    background-color:#51BFD0;
+    height: 100%;
+    padding-top: 50px;
+     border-radius: 6%;
+}
+
+ion-list {
+  
+        
+     ion-item {
+        --ion-item-background: transparent;
+        background-color:none;
+       
+         ion-icon {
+            color:white ;
+            font-size: 32px;
+        }
+        ion-label {
+            font-weight: bold;
+            font-size: 1em;
+            color: white;
+       }
+       
+      }
+      .dec{
+        margin-top: 60%;
+        
+    }
+    }

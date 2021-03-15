@@ -1,0 +1,43 @@
+
+ 
+.haut{
+    min-height: 20%;
+    width: 100%;
+    background-color: white;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    .menu{
+        color: #51BFD0;
+        margin-top: 20%;
+        font-size:2.5em;
+        position: absolute;
+        margin-left:2px;
+    }
+    img{
+        margin-top: 12%;
+    }
+    
+    ion-icon{
+        color:#07AEEF;
+        font-size: 25px;
+        margin-left:70px;
+        margin-top: 15px;
+        position: absolute;
+      } 
+       .text {
+        margin-left: 30%;
+       }
+      
+    h3{
+     margin-top: 5%;
+     color: #22497C;
+  }
+   
+  hr {
+      width: 150px;
+      height: 4px;
+      background:#07AEEF ;
+      margin-top: 5px;
+      border-radius: 30%;
+  }
+ }

@@ -1,0 +1,118 @@
+
+  <ion-content>
+
+  <div class="container">
+     <app-header-transaction [depot]=page [src]=src></app-header-transaction>
+     <form class="list-form" [formGroup]="TransactionForm"   (ngSubmit)="Retirer()">
+      <ion-item no-padding class="animated fadeInUp">
+         <ion-label position="floating">Code</ion-label>
+         <ion-input  name="codeTransaction"  (keyup)="TrouverCode($event)" class="form-control" type="text" formControlName="codeTransaction" [(ngModel)]="retrait.codeTransaction">  </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <div *ngFor="let validation of transaction_validation_message.codeTransaction">
+          <div class="error-message"
+            *ngIf="TransactionForm.get('codeTransaction').hasError(validation.type) && 
+            (TransactionForm.get('codeTransaction').dirty || 
+            TransactionForm.get('codeTransaction').touched)"
+            >
+            <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+            <ion-text color="danger"> {{ validation.message }}  </ion-text>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-wrap">
+            
+          <input type="radio" name="tabs" id="tab1" checked>
+             <div class="tab-label-content" id="tab1-content">
+                 <label class="lab1" for="tab1">Bénéficiaire</label>
+                    <div class="tab-content">
+                        
+                            <ion-item no-padding class="animated fadeInUp">
+                              <ion-label position="floating">N°CNI</ion-label>
+                              <ion-input  name="cni" class="form-control" type="text" formControlName="cinB">  </ion-input>
+                             </ion-item>
+                             <div class="validation-errors">
+                              <div *ngFor="let validation of transaction_validation_message.CinBeneficiare">
+                                <div class="error-message"
+                                  *ngIf="TransactionForm.get('cinB').hasError(validation.type) && 
+                                  (TransactionForm.get('cinB').dirty || 
+                                  TransactionForm.get('cinB').touched)"
+                                  >
+                                  <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+                                  <ion-text color="danger"> {{ validation.message }}  </ion-text>
+                                </div>
+                              </div>
+                            </div>
+                          
+                             <ion-item no-padding lines="none">
+                              <ion-label position="floating">NOM & PRENOM</ion-label>
+                              <p *ngIf="t"> {{t.nomBeneficiaire}}{{esp}}{{t.prenomBeneficiaire}}</p>
+                            </ion-item>
+                            <ion-item no-padding lines="none">
+                              <ion-label position="floating">MONTANT À RECEVOIR</ion-label>
+                              <p *ngIf="t"> {{t.montantEnvoyer}}</p>
+                            </ion-item>
+                            <ion-item no-padding lines="none">
+                              <ion-label position="floating">TÉLÉPHONE</ion-label>
+                              <p *ngIf="t"> {{t.telBeneficiaire}}</p>
+                           </ion-item>
+                           <ion-item no-padding lines="none">
+                            <ion-label position="floating">DATE D'ENVOI</ion-label>
+                            <p *ngIf="t"> {{t.dateEnvoie | date: 'dd/MM/yyyy'}}</p>
+                           </ion-item>
+                  
+                        
+                          <ion-button  expand="block" shape="round"  > 
+                          <label  id="sui"  for="tab2">Suivant</label> </ion-button>
+                  
+                      
+                    </div>
+                  </div>
+                  
+                  <input type="radio" name="tabs" id="tab2">
+                  <div class="tab-label-content" id="tab2-content">
+                    <label  class="lab2" for="tab2">Émétteur</label>
+                    <div class="tab-content">
+                     
+                        <ion-item no-padding lines="none">
+                          <ion-label position="floating">N°CNI</ion-label>
+                          <p *ngIf="t"> {{t.cinEnvoyeur}}</p>
+                      </ion-item>
+                      
+                      <ion-item no-padding lines="none">
+                        <ion-label position="floating">NOM & PRENOM</ion-label>
+                        <p *ngIf="t"> {{t.nomEnvoyeur}}{{esp}}{{t.prenomEnvoyeur}}</p>
+                    </ion-item>
+                    <ion-item no-padding lines="none">
+                      <ion-label position="floating">MONTANT ENVOYÉ</ion-label>
+                      <p *ngIf="t"> {{t.montantEnvoyer}}</p>
+                  </ion-item>
+                  <ion-item no-padding lines="none">
+                    <ion-label position="floating">TÉLÉPHONE</ion-label>
+                    <p *ngIf="t"> {{t.telEnvoyeur}}</p>
+                </ion-item>
+                <ion-item no-padding lines="none">
+                  <ion-label position="floating">DATE D'ENVOI</ion-label>
+                  <p *ngIf="t"> {{t.dateEnvoie | date: 'dd/MM/yyyy'}}</p>
+                  </ion-item>
+              
+                     
+                        <ion-button  expand="block" shape="round"  type="submit" [disabled]="!TransactionForm.valid" > 
+                        Retirer </ion-button>
+                  
+                      
+                    </div>
+                  </div>
+              
+              
+                  
+                  <div class="slide"></div>
+      
+      </div>
+
+     </form>
+
+  </div>
+  
+</ion-content>

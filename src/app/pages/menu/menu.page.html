@@ -1,0 +1,33 @@
+<ion-menu side="start" content-id="main-content"  >
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content  >
+    <ion-list class="men">
+      <ion-item >
+        <ion-icon name="home" slot="start"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-item>
+      <ion-item routerLink="/mtransactions"> 
+        <ion-icon src="assets/icon/transaction.svg" slot="start"></ion-icon>
+        <ion-label>Transactions</ion-label>
+      </ion-item>
+      <ion-item routerLink="/commission">
+        <ion-icon src="assets/icon/commis.svg" slot="start"></ion-icon>
+        <ion-label>Commissions</ion-label>
+      </ion-item>
+      <ion-item routerLink="/depot-compte">
+        <ion-icon src="assets/icon/depot.svg" slot="start"></ion-icon>
+        <ion-label>Déposer de l'argent</ion-label>
+      </ion-item>
+     
+      <ion-item lines="none" class="dec" (click)="OnLogout()" routerLink="">
+        <ion-icon  name="log-out-outline"  slot="start"></ion-icon>
+        <ion-label>Déconnexion</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main-content"></ion-router-outlet>

@@ -1,0 +1,47 @@
+<ion-content>
+  <div class="container">
+    <div class="haut">
+       <div class="ion-text-center">
+         <img src="assets/money_logo.png" alt="">
+
+       </div>
+       <h3 class="ion-text-center"> Login</h3>
+       <hr>
+    </div>
+     <div  >
+       <form class="list-form" [formGroup]="formLogin" (ngSubmit) = "onSubmit()">
+         <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input  name="email" class="form-control" type="Email" formControlName="email"  [(ngModel)]="email"  
+						>  </ion-input>
+         </ion-item>
+         <p ion-text class="text08" *ngIf="formLogin.get('email').touched && formLogin.get('email').hasError('required')">
+          <ion-text color="danger">
+            Email Required
+          </ion-text>
+        </p>
+         <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input name="password" class="form-control" type="password"  [(ngModel)]="password" formControlName="password">  </ion-input>
+       </ion-item>
+       <p ion-text class="text08" *ngIf="formLogin.get('password').touched && formLogin.get('password').hasError('required')">
+        <ion-text color="danger">
+          Password Required
+        </ion-text>
+      </p>
+
+      <!-- <p ion-text class="ion-text-center" *ngIf="submitted && !loggedIn ">
+        <ion-text color="danger">
+          Données invalides
+        </ion-text>
+      </p> -->
+       <h6>Mot de pass oublié </h6>
+       <ion-button type="submit" expand="block" shape="round"  [disabled]="!formLogin.valid"> Se Connecter </ion-button>
+
+
+       </form> 
+     </div>
+
+  </div>
+   
+</ion-content>

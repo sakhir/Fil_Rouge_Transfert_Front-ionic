@@ -1,0 +1,165 @@
+
+.container{
+    width: 100%;
+    height: auto;
+    background-color: #F3F3F3;
+    .list-form {
+      //padding: 15px;
+      margin-bottom: 0;
+      
+    
+      ion-item {
+        --ion-item-background: transparent;
+        background-color:none;
+        padding: 0;
+        margin-top: 5px;
+         p{
+           margin-top: 25px;
+         }
+    
+       
+    
+        ion-label {
+          font-size: 1em;
+          color: #929292
+        }
+    
+        ion-input {
+          width: 90%;
+          height: 70%;
+        }
+      }
+      ion-button {
+        height: 50px;
+        width: 50%;
+        margin-left: 20%;
+        --background:#FA4A0C;
+        margin-top: 20%;
+        color:white;
+          font-size: 1em;
+          font-weight: bold;
+        #sui{
+          color:white;
+         
+      
+        }
+         
+        
+    }
+     .frais{
+      width: 50%;
+      margin-left: 50%;
+     }
+    
+    }
+
+
+$num-of-tabs: 2;
+
+@mixin tabs {
+  @for $i from 1 through $num-of-tabs {
+    &:nth-of-type(#{$i}) {
+      &:checked {
+        ~ .slide {
+          left: calc((130% / #{$num-of-tabs}) * #{$i - 1});
+        }
+      }
+    }
+  }
+}
+
+
+
+.tab-wrap {
+  width: 100%;
+  margin-top: 10%;
+  position: relative;
+  display: flex;
+  border-radius: 30%;
+ 
+}
+
+input[type="radio"][name="tabs"] {
+  position: absolute;
+  z-index: -1;
+  &:checked {
+    + .tab-label-content {
+      label {
+        color: black;;
+      }
+      .tab-content {
+        display: block;
+      }
+    }
+  }
+  @include tabs;
+  &:first-of-type {
+    &:checked {
+      ~ .slide {
+        left: 15%;
+      }
+    }
+  }
+}
+
+.lab1 {
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 56px;
+  transition: color 0.2s ease;
+  width: 100%;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px; 
+  font-weight: bold;
+}
+.lab2{
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 56px;
+  transition: color 0.2s ease;
+  width: 100%;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px; 
+  font-weight: bold;
+}
+
+.slide {
+  background: #FA4A0C;
+  width: calc(40% / #{$num-of-tabs});
+  height: 4px;
+  position: absolute;
+  top: 90%;
+  left: 15%;
+  transition: left 0.3s ease-out;
+}
+
+.tab-label-content {
+  width: 100%;
+  .tab-content {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+    line-height: 130%;
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+}

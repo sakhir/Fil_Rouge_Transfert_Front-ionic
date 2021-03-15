@@ -1,0 +1,34 @@
+<ion-content>
+  <div class="container">
+     <app-header-transaction [depot]=page [src]=src></app-header-transaction>
+ 
+  <form class="list-form" [formGroup]="DepotForm">
+   
+     <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">Montant à Déposer</ion-label>
+      <ion-input  name="montant"  class="form-control" type="number"  [(ngModel)]="depot.montant" formControlName="mont">  </ion-input>
+     </ion-item>
+     <p  ion-text class="text08" *ngIf="DepotForm.get('mont').touched && DepotForm.get('mont').hasError('required')">
+      <ion-text color="warning">
+        Ce champ est obligatoire
+      </ion-text>
+    </p>
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating" >Compte</ion-label>
+      
+      <ion-select formControlName="compt" name="ninea" [(ngModel)]="depot.ninea">
+       <ion-select-option *ngFor="let compte of comptes" [value]="compte.numeroCompte">{{compte.nomBeneficiaire}}</ion-select-option>  
+       
+
+      </ion-select>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="DepotForm.get('compt').touched && DepotForm.get('compt').hasError('required')">
+      <ion-text color="warning">
+        Ce champs est obligaoire 
+      </ion-text>
+    </p>
+     <ion-button class="but"  expand="block" shape="round" (click)="DeposerArgent()" [disabled]="!DepotForm.valid" > 
+      Déposer </ion-button>
+    </form>
+  </div>   
+</ion-content>

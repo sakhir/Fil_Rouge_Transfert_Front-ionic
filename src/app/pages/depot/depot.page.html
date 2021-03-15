@@ -1,0 +1,183 @@
+
+<ion-content>
+
+  <div class="container">
+<app-header-transaction [depot]=page [src]=src></app-header-transaction>
+<form class="list-form" [formGroup]="TransactionForm"  (ngSubmit)="Deposer()">
+<div class="tab-wrap ">
+ 
+    <input type="radio" name="tabs" id="tab1" checked>
+    <div class="tab-label-content" id="tab1-content">
+      <label class="lab1" for="tab1">Emetteur</label>
+      <div class="tab-content">
+             
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">N°CNI</ion-label>
+          <ion-input  name="cinEnvoyeur" class="form-control" type="text" formControlName="cinE" >  </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <div *ngFor="let validation of transaction_validation_message.CinEnvoyeur">
+            <div class="error-message"
+              *ngIf="TransactionForm.get('cinE').hasError(validation.type) && 
+              (TransactionForm.get('cinE').dirty || 
+              TransactionForm.get('cinE').touched)"
+              >
+              <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+              <ion-text color="danger"> {{ validation.message }}  </ion-text>
+            </div>
+          </div>
+        </div>
+          <ion-item no-padding class="animated fadeInUp">
+           <ion-label position="floating">Nom</ion-label>
+           <ion-input name="nomEnvoyeur" class="form-control" type="text" formControlName="nomE">  </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <div *ngFor="let validation of transaction_validation_message.nomEnvoyeur">
+            <div class="error-message"
+              *ngIf="TransactionForm.get('nomE').hasError(validation.type) && 
+              (TransactionForm.get('nomE').dirty || 
+              TransactionForm.get('nomE').touched)"
+              >
+              <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+              <ion-text color="danger"> {{ validation.message }}  </ion-text>
+            </div>
+          </div>
+        </div>
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">Prenom</ion-label>
+          <ion-input name="prenom" class="form-control" type="text" formControlName="prenomE">  </ion-input>
+          </ion-item>
+          <div class="validation-errors">
+            <div *ngFor="let validation of transaction_validation_message.prenomEnvoyeur">
+              <div class="error-message"
+                *ngIf="TransactionForm.get('prenomE').hasError(validation.type) && 
+                (TransactionForm.get('prenomE').dirty || 
+                TransactionForm.get('prenomE').touched)"
+                >
+                <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+                <ion-text color="danger"> {{ validation.message }}  </ion-text>
+              </div>
+            </div>
+          </div>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">Telephone</ion-label>
+            <ion-input name="Telephone" class="form-control" type="text" formControlName="telE" >  </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <div *ngFor="let validation of transaction_validation_message.telEnvoyeur">
+            <div class="error-message"
+              *ngIf="TransactionForm.get('telE').hasError(validation.type) && 
+              (TransactionForm.get('telE').dirty || 
+              TransactionForm.get('telE').touched)"
+              >
+              <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+              <ion-text color="danger"> {{ validation.message }}  </ion-text>
+            </div>
+          </div>
+        </div>
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">Montant</ion-label>
+          <ion-input name="montant"   #tarif (keyup)="TrouverTarif($event)" [(ngModel)]="depot.montant"  class="form-control" type="text" formControlName="montant">  </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <div *ngFor="let validation of transaction_validation_message.montantEnvoyer">
+            <div class="error-message"
+              *ngIf="TransactionForm.get('montant').hasError(validation.type) && 
+              (TransactionForm.get('montant').dirty || 
+              TransactionForm.get('montant').touched)"
+              >
+              <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+              <ion-text color="danger"> {{ validation.message }}  </ion-text>
+            </div>
+          </div>
+        </div>
+        <ion-item no-padding class="animated fadeInUp" class="frais">
+          <ion-label position="floating">Frais</ion-label>
+          <ion-input name="frais" color="orange" class="form-control" type="text"  [(ngModel)]="depot.tarif" formControlName="frais" disabled >  </ion-input>
+        </ion-item>
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">Total</ion-label>
+          <ion-input name="total" class="form-control" type="text"  [(ngModel)]="depot.total" formControlName="total" disabled>  </ion-input>
+        </ion-item>
+          <ion-button class="but"  expand="block" shape="round"  > 
+            <label  id="sui"  for="tab2">Suivant</label> </ion-button>
+          
+      
+         
+
+      </div>
+    </div>
+     
+    <input type="radio" name="tabs" id="tab2">
+    <div class="tab-label-content" id="tab2-content">
+      <label  class="lab2" for="tab2">Bénéficiaire</label>
+      <div class="tab-content">
+      
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="floating">Prenom</ion-label>
+              <ion-input name="prenom" class="form-control" type="text" formControlName="prenomB">  </ion-input>
+          </ion-item>
+          <div class="validation-errors">
+            <div *ngFor="let validation of transaction_validation_message.prenomBeneficiaire">
+              <div class="error-message"
+                *ngIf="TransactionForm.get('prenomB').hasError(validation.type) && 
+                (TransactionForm.get('prenomB').dirty || 
+                TransactionForm.get('prenomB').touched)"
+                >
+                <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+                <ion-text color="danger"> {{ validation.message }}  </ion-text>
+              </div>
+            </div>
+          </div>
+            <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">Nom</ion-label>
+            <ion-input name="nom" class="form-control" type="text" formControlName="nomB">  </ion-input>
+           </ion-item>
+           <div class="validation-errors">
+            <div *ngFor="let validation of transaction_validation_message.nomBeneficiaire">
+              <div class="error-message"
+                *ngIf="TransactionForm.get('nomB').hasError(validation.type) && 
+                (TransactionForm.get('nomB').dirty || 
+                TransactionForm.get('nomB').touched)"
+                >
+                <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+                <ion-text color="danger"> {{ validation.message }}  </ion-text>
+              </div>
+            </div>
+          </div>
+        
+          <ion-item no-padding class="animated fadeInUp">
+           <ion-label position="floating">Telephone</ion-label>
+           <ion-input name="Telephone" class="form-control" type="text" formControlName="telB">  </ion-input>
+           </ion-item>
+           <div class="validation-errors">
+            <div *ngFor="let validation of transaction_validation_message.telBeneficiaire">
+              <div class="error-message"
+                *ngIf="TransactionForm.get('telB').hasError(validation.type) && 
+                (TransactionForm.get('telB').dirty || 
+                TransactionForm.get('telB').touched)"
+                >
+                <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+                <ion-text color="danger"> {{ validation.message }}  </ion-text>
+              </div>
+            </div>
+          </div>
+           
+               <ion-button  expand="block" shape="round"  type="submit" [disabled]="!TransactionForm.valid">  Suivant </ion-button>
+        
+        
+          
+      </div>
+    </div>
+    
+ 
+  
+    <div class="slide"></div>
+  </div>
+ 
+</form> 
+  </div>
+
+
+
+</ion-content>

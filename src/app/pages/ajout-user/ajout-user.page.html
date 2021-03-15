@@ -1,0 +1,174 @@
+   <ion-content> 
+     <div class="container">
+    <div class="haut">
+      <!-- <ion-icon class="menu" name="home" (click)="Back()"> </ion-icon> -->
+       <div class="ion-text-center">
+        <img src="assets/money_logo.png" alt="">
+      </div>
+       <ion-icon name="person-add-outline"></ion-icon>
+      <h3 class="text"> Ajout Utilisateur</h3>
+   
+      <hr>
+   </div>
+  
+
+    <div class="auth-content">
+      <!-- Logo -->
+      <!-- <div padding-horizontal text-center>
+        <div class="logo"></div>
+        <h3 no-margin>
+            <ion-text color="secondary">Enregistrer un utilisateur</ion-text>
+         
+        </h3>
+      </div> -->
+  
+      <!-- Register form -->
+      <form [formGroup]="onRegisterForm"    >
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon name="person-circle-sharp" item-start></ion-icon>
+            Prenom
+          </ion-label>
+          <ion-input color="secondary" type="text" formControlName="prenom" name="prenom" [(ngModel)]="registerUserData.prenom" ></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('prenom').touched && onRegisterForm.get('prenom').hasError('required')">
+          <ion-text color="warning">
+            Ce champ est obligatoire
+          </ion-text>
+        </p>
+  
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon name="person-circle-sharp" item-start></ion-icon>
+            Nom
+          </ion-label>
+          <ion-input color="secondary" type="text" formControlName="nom" name="nom" [(ngModel)]="registerUserData.nom"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('nom').touched && onRegisterForm.get('nom').hasError('required')">
+          <ion-text color="warning">
+            Ce champ est obligatoire
+          </ion-text>
+        </p>
+
+
+
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon name="mail" item-start></ion-icon>
+            Email
+          </ion-label>
+          <ion-input color="secondary" type="email" formControlName="email" name="email" [(ngModel)]="registerUserData.email"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('email').touched && onRegisterForm.get('email').hasError('required')">
+          <ion-text color="warning">
+            Ce champs est obligaoire 
+          </ion-text>
+        </p>
+  
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon name="lock-closed-sharp" item-start></ion-icon>
+            Password
+          </ion-label>
+          <ion-input color="secondary" type="password" formControlName="password" name="password" [(ngModel)]="registerUserData.password"></ion-input>
+        </ion-item>
+        <p ion-text color="warning" class="text08" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">
+          <ion-text color="warning">
+            Ce champ est obligatoire
+          </ion-text>
+        </p>
+
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon name="locate-sharp" item-start></ion-icon>
+            Addresse
+          </ion-label>
+          <ion-input color="secondary" type="text" formControlName="adress" name="adresse" [(ngModel)]="registerUserData.adresse"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('adress').touched && onRegisterForm.get('adress').hasError('required')">
+          <ion-text color="warning">
+            Ce champs est obligaoire 
+          </ion-text>
+        </p>
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            
+            <ion-icon name="call-sharp" item-start></ion-icon>
+            Telephone
+          </ion-label>
+          <ion-input color="secondary" type="text" formControlName="tel" name="telephone" [(ngModel)]="registerUserData.telephone"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('tel').touched && onRegisterForm.get('tel').hasError('required')">
+          <ion-text color="warning">
+            Ce champs est obligaoire 
+          </ion-text>
+        </p>
+    
+        <ion-item no-padding class="animated fadeInUp">
+          
+         
+          <ion-label position="floating" >Profil</ion-label>
+          <ion-icon name="people-sharp" slot="start" ></ion-icon>
+          <ion-select formControlName="profil" name="profil" [(ngModel)]="registerUserData.profil">
+            <ion-select-option *ngFor="let profil of profils" [value]="profil.id">{{profil.libelle}}</ion-select-option> 
+           
+          </ion-select>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('profil').touched && onRegisterForm.get('profil').hasError('required')">
+          <ion-text color="warning">
+            Ce champs est obligaoire 
+          </ion-text>
+        </p>
+
+         <!-- avatar -->
+         <ion-item no-padding class="animated fadeInUp">
+         <ion-label position="floating" >Agence</ion-label>
+         <ion-icon name="business-sharp" slot="start"></ion-icon>
+         <ion-select formControlName="agence" name="agence" [(ngModel)]="registerUserData.agence">
+           <ion-select-option *ngFor="let agence of agences" [value]="agence.id">{{agence.nomPartenaire}}</ion-select-option> 
+          
+
+         </ion-select>
+       </ion-item>
+       <p ion-text class="text08" *ngIf="onRegisterForm.get('agence').touched && onRegisterForm.get('agence').hasError('required')">
+         <ion-text color="warning">
+           Ce champs est obligaoire 
+         </ion-text>
+       </p>
+
+
+         <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            Avatar
+          </ion-label>
+          <div class="col-9">
+            <img [src]="imageUrl" alt="mise a jour" style="width: 100px;height:80px;margin-left: 50%;border-radius: 40%; ">
+            <ion-input type="file" #Image accept="image/png,image/jpeg" (change)="handleFileInput($event.target.files)" name="imageName" class="form-control"> </ion-input>
+        </div>
+        </ion-item>
+         <!-- fin avatar -->
+
+
+
+         <div >
+          <ion-button  expand="full" shape="round"  (click)="registerUser()" [disabled]="!onRegisterForm.valid"
+            tappable>
+            <ion-icon name="log-in"></ion-icon>
+            Enrégistrer
+          </ion-button>
+    
+    
+        </div>
+      </form>
+  
+    
+  
+  
+    </div>
+  
+  </div>
+  </ion-content>  
+
+
+
+
