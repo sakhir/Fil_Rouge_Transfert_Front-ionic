@@ -1,0 +1,44 @@
+
+
+<ion-content>
+  <div class="ion-text-center">
+      
+    <!-- <ion-icon  class="menu" src="assets/icon/menu.svg"> </ion-icon> -->
+    <img src="assets/money_logo.png" alt="">
+       <span *ngIf="avatar!=''">
+        <img  class="avatar" src="{{'data:image/jpg;base64,'+avatar}}" >
+      </span>
+      <span *ngIf="!avatar || avatar=='' ">
+        <img  class="avatar" src="assets/avat.png" >
+       </span>
+    
+    
+    </div>
+  <ion-grid style="margin: auto;"> 
+    <!-- <ion-card> -->
+    <ion-row style="border-bottom:none; padding-bottom: 20px;margin-top:10%;" lines="none">
+      <ion-col col-4>
+      <ion-label ><strong style="text-align:center;font-weight:bold;">Nom</strong></ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label ><strong>Localisation</strong></ion-label>
+    </ion-col>
+      <ion-col col-4>
+      <ion-label ><strong>domaine</strong></ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row style="border-bottom: none;" *ngFor="let a of agences" >
+      <ion-col col-4>
+      <ion-label >{{a.nomPartenaire}}</ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label >{{a.localisation}}</ion-label>
+   
+    </ion-col>
+      <ion-col col-4>
+      <ion-label >{{a.domaineActivite}}</ion-label>
+    </ion-col>
+  </ion-row>
+<!-- </ion-card> -->
+</ion-grid> 
+</ion-content>

@@ -36,6 +36,15 @@ export class TransactionService {
   
       
   }
+  getMtransactions(id:any){
+    return this.http.get<[]>(this.baseUrl+ "/user/"+id+"/transactions");
+   
+  
+  }
+
+  getTransactions(){
+    return this.http.get<[]>(this.baseUrl+ "/all/transactions");
+  }
 
   retirerTans(Trans:any){
     const formData: FormData = new FormData();

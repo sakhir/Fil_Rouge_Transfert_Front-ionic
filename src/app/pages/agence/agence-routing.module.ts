@@ -20,6 +20,14 @@ const routes: Routes = [
   {
     path: 'agence-create',
     loadChildren: () => import('./agence-create/agence-create.module').then( m => m.AgenceCreatePageModule)
+  },
+  {
+    path: 'list-agences',
+    loadChildren: () => import('./list-agences/list-agences.module').then( m => m.ListAgencesPageModule)
+  },
+  {
+    path: 'list-users',
+    loadChildren: () => import('./list-users/list-users.module').then( m => m.ListUsersPageModule)
   }
 ];
 

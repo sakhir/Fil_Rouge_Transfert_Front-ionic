@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, MenuController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
 import { AgenceService } from 'src/app/services/agence.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransactionService } from 'src/app/services/transaction.service';
@@ -23,6 +23,8 @@ export class DepotPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder ,
    private tranServ :TransactionService,
+   private alertCtrl :AlertController,
+   private toastCtrl: ToastController,
     private router: Router) { }
   tarif:string='null';
   tr:boolean=false;
@@ -66,7 +68,6 @@ export class DepotPage implements OnInit {
       ]),
       frais: new FormControl(''),
       total: new FormControl(''),
-      codeTransaction: new FormControl('',[Validators.minLength(14), Validators.maxLength(14), Validators.required]),
 
       cinE: new FormControl('',[ Validators.minLength(14), Validators.maxLength(14),Validators.required,
         Validators.pattern('[0-9]+')])
@@ -76,11 +77,73 @@ export class DepotPage implements OnInit {
  
 // fonction pour deposer de l argent 
 async Deposer() {
-  const loader = await this.loadingCtrl.create({
-    duration: 3000
-  });
+  
 
-  loader.present();
+  const alert = await  this.alertCtrl.create({
+    header: 'Confirmation',
+    message: '<h4>Émetteur</h4> '+ this.TransactionForm.value.nomE+' '+this.TransactionForm.value.prenomE +'<br/><h4>Téléphone</h4> '+this.TransactionForm.value.telE +' <br/><h4>Montant à Envoyer</h4> '+this.TransactionForm.value.montant +' <br/><h4>Récepteur</h4>'+ this.TransactionForm.value.nomB+' '+this.TransactionForm.value.prenomB +' <br/><h4>Téléphone</h4> '+this.TransactionForm.value.telB +' <br/>',
+    buttons: [
+      {
+        text: 'Annuler',
+        handler: () => {
+          console.log('Annuler');
+        }
+      },
+      {
+        text: 'Confirmer',
+         handler:async  () => {
+          console.log('Confirmer');
+          const loader = await this.loadingCtrl.create({
+            duration: 2000
+          });
+       
+         loader.present();
+
+         this.tranServ.registerTans(this.TransactionForm.value)
+         .subscribe(
+           (res:any) =>{
+              
+            setTimeout(
+
+              async ()=>{
+                const alert = await this.alertCtrl.create({
+                  header: 'Message',
+                  message: res,
+                  buttons: ['Ok']
+                });
+                alert.present();
+            },2000)
+             
+          
+           },
+           async (err:any) => { 
+             console.log(err)
+             //console.log(this.TransactionForm.value.nomE)
+             setTimeout(
+
+              async ()=>{
+                const alert = await this.alertCtrl.create({
+                  header: 'Message',
+                  message: err,
+                  buttons: ['Ok']
+                });
+                alert.present();
+            },2000)
+           
+            
+          })
+         // fin traitement 
+        loader.onWillDismiss().then(() => {
+          this.navCtrl.navigateRoot('/agence');
+        });
+              }
+      }
+    ]
+  }).then(res => {
+    res.present();
+  });
+ 
+
 
   // traitement
 //   this.submitted = true;
@@ -89,32 +152,8 @@ async Deposer() {
 // }
 
 
-  this.tranServ.registerTans(this.TransactionForm.value)
-  .subscribe(
-    (res:any) =>{
-       
-     this.router.navigateByUrl("/agence"); 
-     console.log(this.TransactionForm.value)      
-      Swal.fire(
-        'AJOUT AVEC SUCCES!',
-        'success'
-      )
-      
-   
-    },
-    (err:any) => { 
-      console.log(err)
-      console.log(this.TransactionForm.value.nomE)
-      Swal.fire(
-        
-          'Erreur lors de l ajout'
-      )
-     
-   })
-  // fin traitement 
-  loader.onWillDismiss().then(() => {
-    this.navCtrl.navigateRoot('/agence');
-  });
+  
+  
 }
 
 // fin fonction deposer 

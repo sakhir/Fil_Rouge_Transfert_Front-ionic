@@ -2,7 +2,46 @@
 
   <div class="container">
      <app-header-transaction [depot]=page [src]=src></app-header-transaction>
-   
+     <!-- <div >
+      <ion-list>
+        <ion-item *ngFor="let t of mtrans" detail>
+          <ion-label>
+            <h2><strong>Montant: {{t.montantEnvoyer}}</strong><br><small>Date -> {{t.dateEnvoie | date :  "y-MM-d"}}</small><br/><small *ngIf="t.type==true">Type -> retrait</small><small *ngIf="t.type==false">Type ->Depot </small></h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+     
+    </div> -->
+
+    <!-- test  -->
+  <ion-grid style="margin: auto;"> 
+    <!-- <ion-card> -->
+    <ion-row style="border-bottom:none; padding-bottom: 20px;margin-top:10%;" lines="none">
+      <ion-col col-4>
+      <ion-label ><strong style="text-align:center;font-weight:bold;">Date</strong></ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label ><strong>Type</strong></ion-label>
+    </ion-col>
+      <ion-col col-4>
+      <ion-label ><strong>Montant</strong></ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row style="border-bottom: none;" *ngFor="let t of mtrans" >
+      <ion-col col-4>
+      <ion-label >{{t.dateEnvoie | date :  "y-MM-d"}}</ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label *ngIf="t.type==true">Retrait</ion-label>
+      <ion-label *ngIf="t.type==false">Depot</ion-label>
+    </ion-col>
+      <ion-col col-4>
+      <ion-label >{{t.montantEnvoyer}}</ion-label>
+    </ion-col>
+  </ion-row>
+<!-- </ion-card> -->
+</ion-grid> 
+    <!-- fin test  -->
 
 </div>  
 </ion-content>

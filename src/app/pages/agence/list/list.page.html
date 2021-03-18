@@ -5,15 +5,19 @@
         <ion-menu-button  class="menu"></ion-menu-button>   
       <!-- <ion-icon  class="menu" src="assets/icon/menu.svg"> </ion-icon> -->
       <img src="assets/money_logo.png" alt="">
-     
-         <img  class="avatar" src="assets/sa.jpeg" >
+         <span *ngIf="avatar!=''">
+          <img  class="avatar" src="{{'data:image/jpg;base64,'+avatar}}" >
+        </span>
+        <span *ngIf="!avatar || avatar=='' ">
+          <img  class="avatar" src="assets/avat.png" >
+         </span>
      
   
     </div>
-    <div class="montant">
+    <div class="montant" *ngIf="getRole()=='ROLE_Partenaire'">
       <span> Mon solde disponible </span>
-      <h1> 150 000  <small>F CFA</small></h1>
-      <span>Mise a jour le 03/06/2021 à 13h 15 </span>
+      <h1> {{compte}}  <small>F CFA</small></h1>
+      <span>Mise a jour le :</span>
     </div>
   
   </div>
@@ -66,7 +70,7 @@
 <ion-grid>
   <ion-row>
     <ion-col size="6"> 
-      <ion-card>
+      <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
         <a routerLink="/depot" style="text-decoration: none;">
         <img src="assets/depot.png" >
         <ion-card-header>
@@ -74,10 +78,18 @@
         </ion-card-header>
       </a>
       </ion-card>
+      <ion-card *ngIf="getRole()=='ROLE_Super-Admin'">
+        <a routerLink="/agence/list-users" style="text-decoration: none;">
+        <img src="assets/li.jpeg" >
+        <ion-card-header>
+          <ion-card-title class="lib">Liste Utilisateurs</ion-card-title>
+        </ion-card-header>
+      </a>
+      </ion-card>
     </ion-col>
     <ion-col size="6">
          
-  <ion-card>
+  <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
     <a routerLink="/retrait" style="text-decoration: none;">
     <img src="assets/retrait.jpg" >
     <ion-card-header>
@@ -86,12 +98,20 @@
     </ion-card-header>
   </a>
   </ion-card>
+  <ion-card *ngIf="getRole()=='ROLE_Super-Admin'">
+    <a routerLink="/agence/list-agences" style="text-decoration: none;">
+    <img src="assets/li.jpeg" >
+    <ion-card-header>
+      <ion-card-title class="lib">Liste Agences</ion-card-title>
+    </ion-card-header>
+  </a>
+  </ion-card>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col size="6">
-      <ion-card>
+      <ion-card *ngIf="getRole()=='ROLE_Super-Admin'">
         <a routerLink="/ajout-user" style="text-decoration: none;">
         <img src="assets/adduser.png" >
         <ion-card-header>
@@ -100,9 +120,18 @@
         </ion-card-header>
       </a>
       </ion-card>
+      <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
+        <a routerLink="/" style="text-decoration: none;">
+        <img src="assets/annuler.png" >
+        <ion-card-header>
+          
+          <ion-card-title class="libr">Annuler Transaction</ion-card-title>
+        </ion-card-header>
+      </a>
+      </ion-card>
     </ion-col>
     <ion-col size="6">
-      <ion-card>
+      <ion-card *ngIf="getRole()=='ROLE_Super-Admin'">
         <a routerLink="/agence/agence-create" style="text-decoration: none;">
         <img src="assets/ag.png" >
         <ion-card-header>
@@ -111,7 +140,44 @@
         </ion-card-header>
       </a>
       </ion-card>
+      <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
+        <a routerLink="/mtransactions" style="text-decoration: none;">
+        <img src="assets/li.jpeg" >
+        <ion-card-header>
+          
+          <ion-card-title class="libr">Mes Transactions</ion-card-title>
+        </ion-card-header>
+      </a>
+      </ion-card>
     </ion-col>
+   
+    
+    
+  </ion-row>
+  <ion-row *ngIf="getRole()=='ROLE_Caissier'">
+    <ion-col size="6">
+      <ion-card >
+        <a routerLink="/depot-compte" style="text-decoration: none;">
+        <img src="assets/depot.png" >
+        <ion-card-header>
+          
+          <ion-card-title class="lib">Déposer Argent</ion-card-title>
+        </ion-card-header>
+      </a>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card (click)="AnnulerDernierDepot()">
+        <a style="text-decoration: none;">
+        <img src="assets/annuler.png" >
+        <ion-card-header>
+          
+          <ion-card-title class="lib">Annuler dernier dépot</ion-card-title>
+        </ion-card-header>
+      </a>
+      </ion-card>
+    </ion-col>
+
   </ion-row>
    
 </ion-grid>

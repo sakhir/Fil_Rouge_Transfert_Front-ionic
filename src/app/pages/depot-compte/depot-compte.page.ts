@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AgenceService } from 'src/app/services/agence.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -21,7 +21,7 @@ export class DepotComptePage implements OnInit {
   }
   constructor(private formBuilder: FormBuilder ,
     private agserv : AgenceService,public loadingCtrl: LoadingController  ,
-    private router: Router,public navCtrl: NavController,private toastCtrl: ToastController) { }
+    private router: Router,public navCtrl: NavController,private toastCtrl: ToastController ,private alertCtrl :AlertController) { }
 
   ngOnInit() {
     this.getComptes();
@@ -69,26 +69,26 @@ this.agserv.DeposerArgent(this.depot)
 
 
     loader.onWillDismiss().then(async l => {
-      const toast = await this.toastCtrl.create({
-        cssClass: 'primary',
+      const alert = await this.alertCtrl.create({
+        header: 'Message',
         message: res,
-        duration: 5000,
-        position: 'top'
+        buttons: ['Ok']
       });
-
-      toast.present();
+      alert.present();
      // this.navCtrl.navigateForward('/agence');
     });
     //fin test 
     
  
   },
-  (err:any) => { 
+  async (err:any) => { 
     console.log(err)
-    Swal.fire(
-      
-        'Erreur lors du traitement '
-    )
+    const alert = await this.alertCtrl.create({
+      header: 'Message',
+      message: err,
+      buttons: ['Ok']
+    });
+    alert.present();
    
  })
 

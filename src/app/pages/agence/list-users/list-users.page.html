@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>liste Utilisateurs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="margin: auto;"> 
+    <!-- <ion-card> -->
+    <ion-row style="border-bottom:none; padding-bottom: 20px;margin-top:10%;" lines="none">
+      <ion-col col-4>
+      <ion-label ><strong style="text-align:center;font-weight:bold;">Prenom</strong></ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label ><strong>Nom</strong></ion-label>
+    </ion-col>
+      <ion-col col-4>
+      <ion-label ><strong>Profil</strong></ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row style="border-bottom: none;" *ngFor="let u of users" >
+      <ion-col col-4>
+      <ion-label >{{u.prenom}}</ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label >{{u.nom}}</ion-label>
+   
+    </ion-col>
+      <ion-col col-4>
+      <ion-label >{{u.profil.libelle}}</ion-label>
+    </ion-col>
+  </ion-row>
+<!-- </ion-card> -->
+</ion-grid>
+</ion-content>

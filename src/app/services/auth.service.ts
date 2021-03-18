@@ -6,6 +6,7 @@ import { User } from '../Models/Users/User';
 import { Observable, BehaviorSubject } from  'rxjs';
 import { Agence } from '../Models/Agence/Agence';
 import { Profils } from '../Models/Profil/Profil';
+import { NavController } from '@ionic/angular';
 
 
 export const TOKEN_NAME: string = 'token';
@@ -19,7 +20,7 @@ export const TOKEN_NAME: string = 'token';
   roles: Array<string>|any;
  
 
-  constructor(public http: HttpClient,public router: Router) { }
+  constructor(public http: HttpClient,public router: Router ,private navctrl: NavController) { }
   
   registerUser(User:any) {
 
@@ -50,6 +51,10 @@ export const TOKEN_NAME: string = 'token';
     return this.http.get<Agence[]>(this.baseUrl+ "/all/partenaires");
    
   }
+
+  getUsers(){
+    return this.http.get<User[]>(this.baseUrl+ "/all/users?isdeleted=0");
+  }
   allProfils(){
     //Une fonction qui recupére tous les profils 
   
@@ -79,7 +84,7 @@ export const TOKEN_NAME: string = 'token';
     this.jwt = undefined;
     this.roles = undefined;
     this.loggedIn=false;
-    this.router.navigateByUrl("login")
+    this.navctrl.navigateRoot("/login")
   }
   // On va creer la fonction isLOgin qui permet de savoir si un utilisateur est connecté ou  non
   isLogin() {

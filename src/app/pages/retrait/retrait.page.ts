@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, MenuController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
 import { AgenceService } from 'src/app/services/agence.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 import Swal from 'sweetalert2';
@@ -23,6 +23,8 @@ export class RetraitPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder ,
    private tranServ :TransactionService,
+   private alertCtrl :AlertController,
+   private toastCtrl: ToastController,
     private router: Router ,
     private trans:TransactionService) { }
 
@@ -43,50 +45,73 @@ export class RetraitPage implements OnInit {
 
   // fonction pour deposer de l argent 
 async Retirer() {
-  const loader = await this.loadingCtrl.create({
-    duration: 3000
-  });
-
-  loader.present();
-
-  // traitement
-//   this.submitted = true;
-//   if (this.TransactionForm.invalid) {
-//     return;
-// }
-
-
-  this.tranServ.retirerTans(this.TransactionForm.value)
-  .subscribe(
-    (res:any) =>{
+  const alert = await  this.alertCtrl.create({
+    header: 'Confirmation',
+    message: '<h4>Bénéficiaire</h4>'+ this.t.nomBeneficiaire+' '+this.t.prenomBeneficiaire +'<br/><h4>Téléphone</h4> '+ this.t.telBeneficiaire+'<br/><h4>N° CNI</h4>'+ this.TransactionForm.value.cinB+' <br/><h4>Montant Reçu</h4> '+ this.t.montantEnvoyer+'<br/><h4>Émetteur</h4> '+ this.t.nomEnvoyeur+' '+this.t.prenomEnvoyeur +'<br/><h4>Téléphone</h4> '+this.t.telEnvoyeur+' <br/>',
+    buttons: [
+      {
+        text: 'Annuler',
+        handler: () => {
+          console.log('Annuler');
+        }
+      },
+      {
+        text: 'Confirmer',
+         handler:async  () => {
+          console.log('Confirmer');
+          const loader = await this.loadingCtrl.create({
+            duration: 2000
+          });
        
-     this.router.navigateByUrl("/agence"); 
-     console.log(this.TransactionForm.value)      
-      Swal.fire(
-        res
-      )
-      
-   
-    },
-    (err:any) => { 
-      console.log(err)
-      console.log(this.TransactionForm.value.nomE)
-      Swal.fire(
-        
-          'Erreur lors du retrait '
-      )
-     
-   })
-  // fin traitement 
-  loader.onWillDismiss().then(() => {
-    this.navCtrl.navigateRoot('/agence');
+         loader.present();
+         
+         this.tranServ.retirerTans(this.TransactionForm.value)
+         .subscribe(
+            (res:any) =>{
+              
+            setTimeout(
+
+              async ()=>{
+                const alert = await this.alertCtrl.create({
+                  header: 'Message',
+                  message: res,
+                  buttons: ['Ok']
+                });
+                alert.present();
+            },2000)
+            
+             
+          
+           },
+           (err:any) => { 
+             console.log(err)
+             setTimeout(
+
+              async ()=>{
+                const alert = await this.alertCtrl.create({
+                  header: 'Message',
+                  message: err,
+                  buttons: ['Ok']
+                });
+                alert.present();
+            },2000)
+           
+            
+          })
+         // fin traitement 
+        loader.onWillDismiss().then(() => {
+          this.navCtrl.navigateRoot('/agence');
+        });
+              }
+      }
+    ]
+  }).then(res => {
+    res.present();
   });
 }
 
 
   TrouverCode(){
-
-
     
     //console.log(this.depot);
 

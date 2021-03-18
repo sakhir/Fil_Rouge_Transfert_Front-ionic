@@ -28,10 +28,18 @@ export class AgenceService {
   getComptes(){
     return this.http.get<Agence[]>(this.baseUrl+ "/all/comptes");
   }
+
+  getOneCompte(id:any){
+    return this.http.get<[]>(this.baseUrl+ "/compte/"+id);
+  }
   TrouverTarif(montant) {
     
     return this.http.post(this.baseUrl+ "/Trouvertarif",montant);  
       
+  }
+
+  AnnulerDernierDepot(){
+    return this.http.delete(this.baseUrl+ "/annuler/dernier/depot");
   }
 
   DeposerArgent(c:any) {
