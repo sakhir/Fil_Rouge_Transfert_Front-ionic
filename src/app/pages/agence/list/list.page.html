@@ -1,75 +1,43 @@
 
-  <div class="header">
-    <div class="ion-text-center">
-    
-        <ion-menu-button  class="menu"></ion-menu-button>   
-      <!-- <ion-icon  class="menu" src="assets/icon/menu.svg"> </ion-icon> -->
-      <img src="assets/money_logo.png" alt="">
-         <span *ngIf="avatar!=''">
-          <img  class="avatar" src="{{'data:image/jpg;base64,'+avatar}}" >
-        </span>
-        <span *ngIf="!avatar || avatar=='' ">
-          <img  class="avatar" src="assets/avat.png" >
-         </span>
-     
-  
-    </div>
-    <div class="montant" *ngIf="getRole()=='ROLE_Partenaire'">
-      <span> Mon solde disponible </span>
-      <h1> {{compte}}  <small>F CFA</small></h1>
-      <span>Mise a jour le :</span>
-    </div>
-  
-  </div>
-  <!-- <ion-list>
-  
-    <ion-item button routerLink="/depot" >
-      <ion-icon  slot="start" src="assets/icon/depot.svg"> </ion-icon>
-      <ion-label>Dépot</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-    <ion-item  animated button routerLink="/retrait">
-      <ion-icon slot="start" src="assets/icon/retrait.svg"> </ion-icon>
-      <ion-label>Retrait</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-    <ion-item button routerLink="/mtransactions">
-      <ion-icon  slot="start" src="assets/icon/transaction.svg"> </ion-icon>
-      <ion-label>Mes transaction</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-    <ion-item button routerLink="/all-transactions" >
-      <ion-icon slot="start" src="assets/icon/all-transaction.svg"> </ion-icon>
-      <ion-label>Toute les transactions</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-    <ion-item button routerLink="/commission">
-      <ion-icon slot="start" src="assets/icon/commis.svg"> </ion-icon>
-      <ion-label>Mes Commissions</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-    <ion-item  button routerLink="/calcul">
-      <ion-icon slot="start" src="assets/icon/calculator.svg"> </ion-icon>
-      <ion-label>Calculateur de frais</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-    <ion-item  animated button routerLink="/login">
-      <ion-icon slot="start" src="assets/icon/exit.svg"> </ion-icon>
-      <ion-label>Deconnexion</ion-label>
-      <ion-icon src="assets/icon/superieur.svg"> </ion-icon>
-    </ion-item>
-  </ion-list> -->
-
-
-  
-
-
-
-
-
 <ion-grid>
+
+  
+          <div class="header">
+            <div class="ion-text-center">
+              <ion-row>
+              <ion-col size-sm="4" >
+                <ion-menu-button  class="menu"></ion-menu-button>   
+              <!-- <ion-icon  class="menu" src="assets/icon/menu.svg"> </ion-icon> -->
+              </ion-col>
+              <ion-col size-sm="4" >
+                <img src="assets/money_logo.png" alt="">
+              </ion-col>
+              <ion-col size-sm="4"  > 
+                <span *ngIf="avatar!=''">
+                  <img  class="avatar" src="{{'data:image/jpg;base64,'+avatar}}" >
+                </span>
+                <span *ngIf="!avatar || avatar=='' ">
+                  <img  class="avatar" src="assets/avat.png" >
+                </span>
+              </ion-col>
+            </ion-row> 
+            </div>
+          </div>
+  
+          <ion-row>
+            <ion-col size-sm="8" offset-sm="2" >
+          
+           <div class="montant" *ngIf="getRole()=='ROLE_Partenaire'">
+            <span> Mon solde disponible </span>
+            <h1> {{compt}}  <small>F CFA</small></h1>
+            <span>Mise a jour le :</span>
+          </div>
+          
+        </ion-col>
+      </ion-row>  
+  
   <ion-row>
-    <ion-col size="6"> 
+    <ion-col size-sm="4" offset-sm="2"> 
       <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
         <a routerLink="/depot" style="text-decoration: none;">
         <img src="assets/depot.png" >
@@ -87,7 +55,7 @@
       </a>
       </ion-card>
     </ion-col>
-    <ion-col size="6">
+    <ion-col size-sm="4">
          
   <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
     <a routerLink="/retrait" style="text-decoration: none;">
@@ -110,7 +78,7 @@
   </ion-row>
 
   <ion-row>
-    <ion-col size="6">
+    <ion-col  size-sm="4" offset-sm="2">
       <ion-card *ngIf="getRole()=='ROLE_Super-Admin'">
         <a routerLink="/ajout-user" style="text-decoration: none;">
         <img src="assets/adduser.png" >
@@ -121,7 +89,7 @@
       </a>
       </ion-card>
       <ion-card *ngIf="getRole()=='ROLE_Partenaire'">
-        <a routerLink="/" style="text-decoration: none;">
+        <a routerLink="/agence/annuler-trans" style="text-decoration: none;">
         <img src="assets/annuler.png" >
         <ion-card-header>
           
@@ -130,7 +98,7 @@
       </a>
       </ion-card>
     </ion-col>
-    <ion-col size="6">
+    <ion-col  size-sm="4">
       <ion-card *ngIf="getRole()=='ROLE_Super-Admin'">
         <a routerLink="/agence/agence-create" style="text-decoration: none;">
         <img src="assets/ag.png" >
@@ -155,7 +123,7 @@
     
   </ion-row>
   <ion-row *ngIf="getRole()=='ROLE_Caissier'">
-    <ion-col size="6">
+    <ion-col  size-sm="4">
       <ion-card >
         <a routerLink="/depot-compte" style="text-decoration: none;">
         <img src="assets/depot.png" >

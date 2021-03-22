@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { TransactionService } from 'src/app/services/transaction.service';
+import { AuthentificationService } from 'src/app/services/authentification.service';
+import { ActivatedRoute } from '@angular/router';
+import { Storage } from  '@ionic/storage';
 const helper = new JwtHelperService();
 @Component({
   selector: 'app-mtransactions',
@@ -11,28 +14,52 @@ const helper = new JwtHelperService();
 export class MtransactionsPage implements OnInit {
   page='Mes Transactions';
   src="assets/icon/transaction.svg";
-  constructor( private auth :AuthService , private transServ :TransactionService) { }
-
+  constructor( private auth :AuthService , private transServ :TransactionService , private autha :AuthentificationService , private ActivatedRoute : ActivatedRoute,private  storage:  Storage) { }
+id:any;
+role:any;
   ngOnInit() {
    // console.log( this.GetIdUserConnecte());
-   this.getMtransactions();
-    
+   
+  //  this.autha.userInfo.subscribe(user => {
+  //   //alert(user)
+  //   if(user){
+  //     this.id = user.id;
+  //     this.role=user.roles[0];
+  //   }
+  // })
+
+
+  this.ActivatedRoute.params.subscribe(()=>{
+      
+    this.storage.get('token').then(token=> {
+      //console.log(this.autha.getInfosToken(token));
+      var decoded=this.autha.getInfosToken(token);
+       if(decoded){
+          this.id=decoded.id;
+          this.getMtransactions();
+          this.role=decoded.roles[0];
+         
+               }
+          }
+     
+    )
+})
+  
+ 
+
+
+
+
   }
  mtrans:any;
- // je dois recuperer l id de l utilisateur qui s est connecté 
- GetIdUserConnecte() {
-  const decoded :any= helper.decodeToken(this.auth.getToken());
- return decoded.id;
-}
 
 // recuperer les partenaires
 getMtransactions(){
-  this.transServ.getMtransactions(this.GetIdUserConnecte()).subscribe(
+  this.transServ.getMtransactions(this.id).subscribe(
     data=>{
      
       this.mtrans=data; 
-
-      console.log(data);
+     // console.log(data);
         
     },
     err =>console.log(err));

@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'list-users',
     loadChildren: () => import('./list-users/list-users.module').then( m => m.ListUsersPageModule)
+  },
+  {
+    path: 'annuler-trans',
+    loadChildren: () => import('./annuler-trans/annuler-trans.module').then( m => m.AnnulerTransPageModule)
   }
 ];
 

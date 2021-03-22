@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate} from '@angular/router';
+import { CanActivate, Router} from '@angular/router';
 import { from, Observable } from 'rxjs';
 import { Storage } from  '@ionic/storage';
 import { AuthentificationService } from '../services/authentification.service';
@@ -8,23 +8,24 @@ import { map } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class ConnexionGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(
 
     private autha : AuthentificationService,
-    private storage :Storage){}
+    private storage :Storage ,private router:Router ){}
     canActivate(
-    ): Observable<boolean > {
+    ): Observable<any > {
 
 
      return from(this.storage.get('token')).pipe(
 
       map((token) => {
        if(token){
-          return true;
+         this.router.navigateByUrl('/agence')
+         
        }
        else {
-         this.autha.logout();
+         return true;
        }
       }) 
 

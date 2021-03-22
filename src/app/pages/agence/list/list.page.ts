@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
+import { from } from 'rxjs';
 import { AgenceService } from 'src/app/services/agence.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { AuthentificationService } from 'src/app/services/authentification.service';
+import { Storage } from  '@ionic/storage';
+import { map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 const helper = new JwtHelperService();
 @Component({
   selector: 'app-list',
@@ -12,29 +17,62 @@ const helper = new JwtHelperService();
 export class ListPage implements OnInit {
 
   constructor(private auth :AuthService ,private agSer : AgenceService ,private alertCtrl :AlertController ,public loadingCtrl: LoadingController
-    ,private toastCtrl: ToastController,public menuCtrl: MenuController,public navCtrl: NavController) { }
+    ,private toastCtrl: ToastController,public menuCtrl: MenuController,public navCtrl: NavController ,private autha:AuthentificationService , private ActivatedRoute : ActivatedRoute,
+    private  storage:  Storage) { }
   compte:any;
   avatar:any;
+  role:any;
+  U:any;
+  id:any;
+  user: object;
+  compt:any;
   ngOnInit() {
-   
-    this.compte=this.GetInfosUserConnecte().compte;
-    this.avatar=this.GetInfosUserConnecte().avatar;
- 
+  
+    this.ActivatedRoute.params.subscribe(()=>{
+      
+      this.storage.get('token').then(token=> {
+        //console.log(this.autha.getInfosToken(token));
+        var decoded=this.autha.getInfosToken(token);
+         if(decoded){
+            this.id=decoded.id;
+            
+            this.getOneUser();
+            this.compte = this.compt;
+            this.avatar=decoded.avatar;
+            this.role=decoded.roles[0];
+           
+                 }
+            }
+       
+      )
+  })
     
+   
+
+ 
+  
+    
+  
   }
- // je dois recuperer l id de l utilisateur qui s est connecté 
- GetInfosUserConnecte() {
-  const decoded :any= helper.decodeToken(this.auth.getToken());
- return decoded;
-}
+
+  
 
 // je vais creer une fonction qui permet de recuperer le role
 
-getRole(){
-  return this.GetInfosUserConnecte().roles[0];
+ getRole(){
+   return this.role;
+ }
+ getOneUser() {
+  this.auth.getOneUser(this.id).subscribe(
+    data=>{ 
+      this.compt=data['compte'].solde; 
+      
+       
+      //console.log(data['compte'].solde);
+        
+    },
+    err =>console.log(err));
 }
-
-
 // fonction pour deposer de l argent 
 async AnnulerDernierDepot() {
   
@@ -83,7 +121,7 @@ async AnnulerDernierDepot() {
 
               async ()=>{
               const alert = await this.alertCtrl.create({
-                  header: 'ok',
+                  header: 'Message',
                   message: err,
                   buttons: ['Ok']
                 });

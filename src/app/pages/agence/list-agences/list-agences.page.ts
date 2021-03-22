@@ -19,7 +19,9 @@ getAgences(){
   this.auth.getAgences().subscribe(
     data=>{
      
-      this.agences=data;         
+      this.agences=data; 
+      console.log(data);
+              
     },
     err =>console.log(err));
 }

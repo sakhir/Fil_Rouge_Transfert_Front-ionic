@@ -54,10 +54,19 @@ export class TransactionService {
 
   }
 
+  AnnulerTans(Trans:any){
+    const formData: FormData = new FormData();
+    formData.append('codeTransaction', Trans.codeTransaction);
+    
+    
+    return this.http.post(this.baseUrl+ "/annuler/dernier/transaction",formData);
+
+  }
+
   TrouverCode(code:any){
     const formData: FormData = new FormData();
     formData.append('codeTransaction', code.codeTransaction);
-    console.log(code.codeTransaction);
+    
     
     return this.http.post(this.baseUrl+ "/TrouverCode",formData);
   }

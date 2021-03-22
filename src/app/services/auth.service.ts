@@ -6,6 +6,7 @@ import { User } from '../Models/Users/User';
 import { Observable, BehaviorSubject } from  'rxjs';
 import { Agence } from '../Models/Agence/Agence';
 import { Profils } from '../Models/Profil/Profil';
+import { Storage } from  '@ionic/storage';
 import { NavController } from '@ionic/angular';
 
 
@@ -20,7 +21,7 @@ export const TOKEN_NAME: string = 'token';
   roles: Array<string>|any;
  
 
-  constructor(public http: HttpClient,public router: Router ,private navctrl: NavController) { }
+  constructor(public http: HttpClient,public router: Router ,private navctrl: NavController ,private  storage:  Storage) { }
   
   registerUser(User:any) {
 
@@ -50,6 +51,10 @@ export const TOKEN_NAME: string = 'token';
   getAgences(){
     return this.http.get<Agence[]>(this.baseUrl+ "/all/partenaires");
    
+  }
+
+  getOneUser(id:any){
+    return this.http.get<User[]>(this.baseUrl+ "/user/"+id);
   }
 
   getUsers(){

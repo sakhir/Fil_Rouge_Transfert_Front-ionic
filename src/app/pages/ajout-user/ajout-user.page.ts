@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {  MenuController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,7 +23,8 @@ export class AjoutUserPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder ,
     private authService: AuthService,
-    private router: Router
+    private router: Router ,
+    private alertCtrl :AlertController
     ) {
     
    }
@@ -113,23 +114,30 @@ getProfils(){
     this.authService.registerUser(this.registerUserData)
     .subscribe(
       (res:any) =>{
-        console.log(this.registerUserData)  
-       this.router.navigateByUrl("/agence");       
-        Swal.fire(
-          'AJOUT AVEC SUCCES!',
-          'success'
-        )
+        //console.log(this.registerUserData)  
+      // this.router.navigateByUrl("/agence");       
+       async ()=>{
+        const alert = await this.alertCtrl.create({
+          header: 'Message',
+          message: res,
+          buttons: ['Ok']
+        });
+        alert.present();
+    }
         
      
       },
       (err:any) => { 
         console.log(err)
-        console.log(this.registerUserData)
-        Swal.fire(
-          
-            'Erreur lors de l ajout'
-        )
-       
+        //console.log(this.registerUserData)
+        async ()=>{
+          const alert = await this.alertCtrl.create({
+            header: 'Message',
+            message: err,
+            buttons: ['Ok']
+          });
+          alert.present();
+      }
      })
     // fin traitement 
     loader.onWillDismiss().then(() => {

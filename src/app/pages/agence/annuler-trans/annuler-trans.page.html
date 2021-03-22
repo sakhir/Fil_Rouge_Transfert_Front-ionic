@@ -1,0 +1,34 @@
+<ion-content>
+
+  <div class="container">
+     <app-header-transaction [depot]=page [src]=src></app-header-transaction>
+  </div> 
+  <form [formGroup]="CancelForm"    (ngSubmit)="AnnulerTransaction()">
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">Code</ion-label>
+      <ion-input  name="codeTransaction"  (keyup)="TrouverCode($event)" class="form-control" type="text" formControlName="codeTransaction" [(ngModel)]="annuler.codeTransaction">  </ion-input>
+   </ion-item>
+   <div class="validation-errors">
+     <div *ngFor="let validation of transaction_validation_message.codeTransaction">
+       <div class="error-message"
+         *ngIf="CancelForm.get('codeTransaction').hasError(validation.type) && 
+         (CancelForm.get('codeTransaction').dirty || 
+         CancelForm.get('codeTransaction').touched)"
+         >
+         <ion-icon name="information-circle-outline" color="danger" ></ion-icon> 
+         <ion-text color="danger"> {{ validation.message }}  </ion-text>
+       </div>
+     </div>
+   </div>
+   <ion-item no-padding lines="none">
+    <ion-label position="floating"></ion-label>
+    <p *ngIf="t"> dépot fait par   {{t.prenomEnvoyeur}} {{t.nomEnvoyeur}}</p>
+  </ion-item>
+     <div >
+      <ion-button  expand="block" shape="round"  type="submit" [disabled]="!CancelForm.valid" > 
+        Annuler </ion-button>
+
+
+    </div>
+  </form>
+</ion-content>
