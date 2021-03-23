@@ -13,6 +13,7 @@
                 <img src="assets/money_logo.png" alt="">
               </ion-col>
               <ion-col size-sm="4"  > 
+                
                 <span *ngIf="avatar!=''">
                   <img  class="avatar" src="{{'data:image/jpg;base64,'+avatar}}" >
                 </span>
@@ -30,7 +31,7 @@
            <div class="montant" *ngIf="getRole()=='ROLE_Partenaire'">
             <span> Mon solde disponible </span>
             <h1> {{compt}}  <small>F CFA</small></h1>
-            <span>Mise a jour le :</span>
+            <span>Mise a jour le : {{da | date :  "y-MM-d"}}</span>
           </div>
           
         </ion-col>

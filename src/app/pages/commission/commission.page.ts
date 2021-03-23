@@ -1,20 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from  '@ionic/storage';
-
+import { ViewEncapsulation } from '@angular/core';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-commission',
   templateUrl: './commission.page.html',
   styleUrls: ['./commission.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CommissionPage implements OnInit {
+  @ViewChild('myTable') table: any;
+  columns: any;
+rows: any;
+temp = [];
+expanded: any = {};
+timeout: any;  
   page='Mes Commissions';
   src="assets/icon/commis.svg";
   id:any;
 role:any;
 mtrans:any;
+
+t:any;
 
   constructor( private ActivatedRoute : ActivatedRoute,private  storage:  Storage , private transServ :TransactionService , private autha :AuthentificationService ) { }
 
@@ -34,6 +44,11 @@ mtrans:any;
        
       )
   })
+  this.columns = [
+    { name: 'Date' },
+    { name: 'Montant' },
+    { name: 'type' }
+  ];
     
   }
 
@@ -41,12 +56,39 @@ mtrans:any;
     this.transServ.getMtransactions(this.id).subscribe(
       data=>{
        
-        this.mtrans=data; 
-        console.log(data);
+        this.temp = [...data];
+        this.mtrans=data;
+        this.rows = data;
+        this.t=0;
+          for (let index = 0; index < data.length; index++) {
+            if(data[index]['commissionEnvoi']!=null) {
+            this.t=this.t+data[index]['commissionEnvoi'];
+            }
+            if(data[index]['commissionRetrait']!=null) {
+              this.t=this.t+data[index]['commissionRetrait'];
+              }
+            
+          }
+          
+        
           
       },
       err =>console.log(err));
   }
   
+  onPage(event) {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      // console.log('paged!', event);
+    }, 100);
+  }
+  toggleExpandRow(row) {
+   // console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
+  }
+  
+  onDetailToggle(event) {
+   // console.log('Detail Toggled', event);
+  }
 
 }

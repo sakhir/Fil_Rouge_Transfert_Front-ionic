@@ -7,10 +7,10 @@
       <!-- <ion-tab-button tab="about">
           <ion-icon src="assets/icon/information.svg"></ion-icon>
       </ion-tab-button> -->
-      <ion-tab-button tab="commission" *ngIf="getRole()=='ROLE_Partenaire'">
+      <ion-tab-button routerLink="/commission" *ngIf="getRole()=='ROLE_Partenaire'">
           <ion-icon src="assets/icon/commis.svg"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="calcul">
+      <ion-tab-button routerLink="/calcul">
           <ion-icon src="assets/icon/calculator.svg"></ion-icon>
       </ion-tab-button>
    </ion-tab-bar>

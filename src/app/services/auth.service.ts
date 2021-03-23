@@ -49,7 +49,7 @@ export const TOKEN_NAME: string = 'token';
   }
 
   getAgences(){
-    return this.http.get<Agence[]>(this.baseUrl+ "/all/partenaires");
+    return this.http.get<Agence[]>(this.baseUrl+ "/all/partenaires?statut=0");
    
   }
 
@@ -116,6 +116,14 @@ export const TOKEN_NAME: string = 'token';
     //Une fonction qui recupére tous les utilisateurs 
       return this.http.get<User[]>(this.baseUrl+ "/admin/users/"+id);
     }
+
+    DeleteUser(id:any){
+      return this.http.delete<string>(this.baseUrl+ "/supprimer/user/"+id);
+    }
+    BloquerUser(id:any){
+      return this.http.delete<string>(this.baseUrl+ "/bloquer/user/"+id);
+    }
+
 
     isSuperAdmin() {
 

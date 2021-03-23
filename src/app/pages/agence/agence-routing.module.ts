@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'annuler-trans',
     loadChildren: () => import('./annuler-trans/annuler-trans.module').then( m => m.AnnulerTransPageModule)
+  },
+  {
+    path: 'list-depot',
+    loadChildren: () => import('./list-depot/list-depot.module').then( m => m.ListDepotPageModule)
   }
 ];
 

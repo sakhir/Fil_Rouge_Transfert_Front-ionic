@@ -8,13 +8,15 @@ import { AllTransactionsPageRoutingModule } from './all-transactions-routing.mod
 
 import { AllTransactionsPage } from './all-transactions.page';
 import { HeaderTransactionPage } from '../header-transaction/header-transaction.page';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AllTransactionsPageRoutingModule
+    AllTransactionsPageRoutingModule,
+    NgxDatatableModule 
   ],
   declarations: [AllTransactionsPage,HeaderTransactionPage]
 })

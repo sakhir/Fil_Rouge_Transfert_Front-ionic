@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {  BehaviorSubject } from  'rxjs';
+import { Storage } from  '@ionic/storage';
+
 
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { User } from 'src/app/Models/Users/User';
@@ -27,13 +29,34 @@ export class LoginPage implements OnInit {
   }
   private loading;
   constructor(private authService: AuthService,private formBuilder: FormBuilder ,private router:Router,
-    private loadingctrl:LoadingController , private  autha : AuthentificationService ,private alertCtrl :AlertController) { }
+    private loadingctrl:LoadingController , private  autha : AuthentificationService ,private alertCtrl :AlertController ,private navCtrl: NavController,
+    private  ActivatedRoute:ActivatedRoute , private storage :Storage) { }
 
   ngOnInit() {
+  //   this.ActivatedRoute.params.subscribe(()=>{
+
+  //     this.storage.get('token').then(token=> {
+  //       var decoded=this.autha.getInfosToken(token);
+  //         console.log(decoded);
+          
+  //        if(decoded){
+  //            console.log(true);
+             
+  //                }
+  //                else{
+  //                 console.log(false);
+                   
+  //                }
+  //        }
+       
+  //     )
+  // })
+   
     this.formLogin = this.formBuilder.group({
       email: ['',[ Validators.required,Validators.email]],
       password: ['',[ Validators.required,Validators.minLength(6)]]
     })
+
   }
   get f(){
     return this.formLogin.controls

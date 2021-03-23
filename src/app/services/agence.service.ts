@@ -32,6 +32,10 @@ export class AgenceService {
   getOneCompte(id:any){
     return this.http.get<[]>(this.baseUrl+ "/compte/"+id);
   }
+
+  getMdepots(id:any) {
+    return this.http.get<[]>(this.baseUrl+ "/depots/"+id+"/caissier");
+  }
   TrouverTarif(montant) {
     
     return this.http.post(this.baseUrl+ "/Trouvertarif",montant);  
@@ -44,5 +48,8 @@ export class AgenceService {
 
   DeposerArgent(c:any) {
     return this.http.post(this.baseUrl+ "/faire/depot",c);  
+  }
+  BloquerAgence(id:any){
+    return this.http.delete<string>(this.baseUrl+ "/bloquer/partenaire/"+id);
   }
 }

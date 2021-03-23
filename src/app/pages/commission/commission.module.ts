@@ -8,13 +8,16 @@ import { CommissionPageRoutingModule } from './commission-routing.module';
 
 import { CommissionPage } from './commission.page';
 import { HeaderTransactionPage } from '../header-transaction/header-transaction.page';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CommissionPageRoutingModule
+    CommissionPageRoutingModule ,
+    NgxDatatableModule
   ],
   declarations: [CommissionPage,HeaderTransactionPage]
 })

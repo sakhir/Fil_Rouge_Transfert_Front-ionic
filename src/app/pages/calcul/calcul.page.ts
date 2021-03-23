@@ -51,11 +51,6 @@ this.agserv.TrouverTarif(this.calcul)
   (res:any) =>{
     console.log(res);
 
-   //this.router.navigateByUrl("/agence");       
-    // Swal.fire(
-    //   res
-    // )
-    //test
     loader.onWillDismiss().then(async l => {
       // const toast = await this.toastCtrl.create({
       //   cssClass: 'primary',

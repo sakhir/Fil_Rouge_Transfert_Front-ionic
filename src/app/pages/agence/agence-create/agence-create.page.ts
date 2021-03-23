@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {  MenuController, LoadingController } from '@ionic/angular';
 
@@ -23,7 +23,8 @@ export class AgenceCreatePage implements OnInit {
     private formBuilder: FormBuilder ,
     private authService: AuthService,
     private agserv : AgenceService,
-    private router: Router
+    private router: Router,
+    private alertCtrl :AlertController
   ) { }
 
   ngOnInit() {
@@ -51,7 +52,10 @@ export class AgenceCreatePage implements OnInit {
       nomPartenaire: null
            
   };
-
+  Back(){
+    this.navCtrl.back();
+    
+     }
   async registerAgence() {
     const loader = await this.loadingCtrl.create({
       duration: 2000
@@ -68,27 +72,34 @@ export class AgenceCreatePage implements OnInit {
     this.agserv.registerAgence(this.registerAgenceData)
     .subscribe(
       (res:any) =>{
-        console.log(this.registerAgenceData)  
-       this.router.navigateByUrl("/agence");       
-        Swal.fire(
-          'Agence ajoutée avec succés !',
-          'success'
-        )
-        
+        setTimeout(
+
+          async ()=>{
+            const alert = await this.alertCtrl.create({
+              header: 'Message',
+              message: res,
+              buttons: ['Ok']
+            });
+            alert.present();
+        },2000)
      
       },
       (err:any) => { 
-        console.log(err)
-        console.log(this.registerAgenceData)
-        Swal.fire(
-          
-            'Erreur lors de l\' ajout'
-        )
+        setTimeout(
+
+          async ()=>{
+            const alert = await this.alertCtrl.create({
+              header: 'Message',
+              message: err,
+              buttons: ['Ok']
+            });
+            alert.present();
+        },2000)
        
      })
     // fin traitement 
     loader.onWillDismiss().then(() => {
-      this.navCtrl.navigateRoot('/agence');
+      this.navCtrl.navigateRoot('/agence/list-agences');
     });
   }
 

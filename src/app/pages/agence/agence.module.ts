@@ -11,6 +11,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ListPage } from './list/list.page';
 import { FootComponent } from './foot/foot.component';
 import { MenuPage } from '../menu/menu.page';
+import { FooterPage } from '../footer/footer.page';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,6 @@ import { MenuPage } from '../menu/menu.page';
    
     AgencePageRoutingModule
   ],
-  declarations: [AgencePage,TabsComponent,FootComponent,ListPage,MenuPage]
+  declarations: [AgencePage,TabsComponent,FootComponent,ListPage,MenuPage ,FooterPage]
 })
 export class AgencePageModule {}

@@ -1,44 +1,76 @@
 
-
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-icon name="home" class="menu" (click)="Back()"></ion-icon>
+      <ion-title>Liste des agences</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <div class="ion-text-center">
-      
-    <!-- <ion-icon  class="menu" src="assets/icon/menu.svg"> </ion-icon> -->
-    <img src="assets/money_logo.png" alt="">
-       <span *ngIf="avatar!=''">
-        <img  class="avatar" src="{{'data:image/jpg;base64,'+avatar}}" >
-      </span>
-      <span *ngIf="!avatar || avatar=='' ">
-        <img  class="avatar" src="assets/avat.png" >
-       </span>
+
+<div class="ion-padding">
+  <input
+  type="text"
+  style="padding:8px;margin:15px auto;width:90%;"
+  placeholder="Rechercher par le nom  "
+  (keyup)="updateFilter($event)"
+/>
+   <!-- Theme classes dark, material, bootstrap -->
+  <ngx-datatable   #myTable
+    class="material fullscreen expandable"
+    [limit]="5" 
+    [rows]="rows" 
+    [rowHeight]="60" 
+    [columnMode]="'force'" 
+    [sortType]="'multi'" 
+    [headerHeight]="50" 
+    [footerHeight]="50"
+    [summaryRow]="true" [summaryPosition]="'top'"
+    [scrollbarH]="true"
+    (page)="onPage($event)"
+    >
+    <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+        <div style="padding-left:35px;">
+          <div><strong>Localisation</strong> :{{ row.localisation }} </div>
+        <br/>
+          <div><strong>Domaine</strong> :{{ row.domaineActivite }}</div>
+          <br/>
+        </div>
+          </ng-template>
+    </ngx-datatable-row-detail>
+    <ngx-datatable-column
+    [width]="50"
+    [resizeable]="false"
+    [sortable]="false"
+    [draggable]="false"
+    [canAutoResize]="false"
+  >
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+      <a
+        href="javascript:void(0)"
+        [class.datatable-icon-right]="!expanded"
+        [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row"
+        (click)="toggleExpandRow(row)"
+      >
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+    <ngx-datatable-column name="NomPartenaire" [width]="115" [draggable]="false"></ngx-datatable-column>
+    <ngx-datatable-column name="Action" [width]="100" sortable="false" [draggable]="false">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+        <ion-button   class="blo" shape="round" (click)="BloquerAgence(row)" >
+         Bloquer
+        </ion-button>
+
+  
+  </ng-template>
+    </ngx-datatable-column>
     
-    
-    </div>
-  <ion-grid style="margin: auto;"> 
-    <!-- <ion-card> -->
-    <ion-row style="border-bottom:none; padding-bottom: 20px;margin-top:10%;" lines="none">
-      <ion-col col-4>
-      <ion-label ><strong style="text-align:center;font-weight:bold;">Nom</strong></ion-label>
-    </ion-col>
-    <ion-col col-4>
-      <ion-label ><strong>Localisation</strong></ion-label>
-    </ion-col>
-      <ion-col col-4>
-      <ion-label ><strong>domaine</strong></ion-label>
-    </ion-col>
-  </ion-row>
-  <ion-row style="border-bottom: none;" *ngFor="let a of agences" >
-      <ion-col col-4>
-      <ion-label >{{a.nomPartenaire}}</ion-label>
-    </ion-col>
-    <ion-col col-4>
-      <ion-label >{{a.localisation}}</ion-label>
-   
-    </ion-col>
-      <ion-col col-4>
-      <ion-label >{{a.domaineActivite}}</ion-label>
-    </ion-col>
-  </ion-row>
-<!-- </ion-card> -->
-</ion-grid> 
+  </ngx-datatable>
+
+</div>
 </ion-content>

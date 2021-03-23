@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ListUsersPageRoutingModule } from './list-users-routing.module';
 
 import { ListUsersPage } from './list-users.page';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListUsersPageRoutingModule
+    ListUsersPageRoutingModule ,
+    NgxDatatableModule 
   ],
   declarations: [ListUsersPage]
 })

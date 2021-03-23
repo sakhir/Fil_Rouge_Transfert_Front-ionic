@@ -4,19 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListAgencesPageRoutingModule } from './list-agences-routing.module';
+import { ListDepotPageRoutingModule } from './list-depot-routing.module';
 
-import { ListAgencesPage } from './list-agences.page';
+import { ListDepotPage } from './list-depot.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListAgencesPageRoutingModule ,
-    NgxDatatableModule 
+    NgxDatatableModule,
+    ListDepotPageRoutingModule
   ],
-  declarations: [ListAgencesPage]
+  declarations: [ListDepotPage]
 })
-export class ListAgencesPageModule {}
+export class ListDepotPageModule {}

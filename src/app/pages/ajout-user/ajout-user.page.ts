@@ -113,31 +113,35 @@ getProfils(){
  
     this.authService.registerUser(this.registerUserData)
     .subscribe(
-      (res:any) =>{
-        //console.log(this.registerUserData)  
-      // this.router.navigateByUrl("/agence");       
-       async ()=>{
-        const alert = await this.alertCtrl.create({
-          header: 'Message',
-          message: res,
-          buttons: ['Ok']
-        });
-        alert.present();
-    }
+      (res:any) =>{ 
+        
+        
+        setTimeout(
+
+          async ()=>{
+            const alert = await this.alertCtrl.create({
+              header: 'Message',
+              message: res,
+              buttons: ['Ok']
+            });
+            alert.present();
+        },2000)
         
      
       },
       (err:any) => { 
         console.log(err)
         //console.log(this.registerUserData)
-        async ()=>{
-          const alert = await this.alertCtrl.create({
-            header: 'Message',
-            message: err,
-            buttons: ['Ok']
-          });
-          alert.present();
-      }
+        setTimeout(
+
+          async ()=>{
+            const alert = await this.alertCtrl.create({
+              header: 'Message',
+              message: err,
+              buttons: ['Ok']
+            });
+            alert.present();
+        },2000)
      })
     // fin traitement 
     loader.onWillDismiss().then(() => {

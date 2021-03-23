@@ -8,6 +8,7 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 import { Storage } from  '@ionic/storage';
 import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 const helper = new JwtHelperService();
 @Component({
   selector: 'app-list',
@@ -18,7 +19,7 @@ export class ListPage implements OnInit {
 
   constructor(private auth :AuthService ,private agSer : AgenceService ,private alertCtrl :AlertController ,public loadingCtrl: LoadingController
     ,private toastCtrl: ToastController,public menuCtrl: MenuController,public navCtrl: NavController ,private autha:AuthentificationService , private ActivatedRoute : ActivatedRoute,
-    private  storage:  Storage) { }
+    private  storage:  Storage ) { }
   compte:any;
   avatar:any;
   role:any;
@@ -26,16 +27,17 @@ export class ListPage implements OnInit {
   id:any;
   user: object;
   compt:any;
+  da:any;
   ngOnInit() {
   
     this.ActivatedRoute.params.subscribe(()=>{
       
       this.storage.get('token').then(token=> {
         //console.log(this.autha.getInfosToken(token));
+        
         var decoded=this.autha.getInfosToken(token);
          if(decoded){
             this.id=decoded.id;
-            
             this.getOneUser();
             this.compte = this.compt;
             this.avatar=decoded.avatar;
@@ -65,11 +67,11 @@ export class ListPage implements OnInit {
  getOneUser() {
   this.auth.getOneUser(this.id).subscribe(
     data=>{ 
-      this.compt=data['compte'].solde; 
+      this.compt=data['compte'].solde;
+      this.da=data['compte'].datemaj; 
+      //console.log(data);
       
-       
-      //console.log(data['compte'].solde);
-        
+           
     },
     err =>console.log(err));
 }
@@ -79,7 +81,7 @@ async AnnulerDernierDepot() {
 
   const alert = await  this.alertCtrl.create({
     header: 'Confirmation',
-    message: '<h4>Message</h4> ',
+    message: '<h4>Voulez vous annuler votre dernier depot ?</h4> ',
     buttons: [
       {
         text: 'Annuler',

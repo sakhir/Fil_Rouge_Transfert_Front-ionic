@@ -8,13 +8,15 @@ import { MtransactionsPageRoutingModule } from './mtransactions-routing.module';
 
 import { MtransactionsPage } from './mtransactions.page';
 import { HeaderTransactionPage } from '../header-transaction/header-transaction.page';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MtransactionsPageRoutingModule
+    MtransactionsPageRoutingModule ,
+    NgxDatatableModule
   ],
   declarations: [MtransactionsPage,HeaderTransactionPage]
 })

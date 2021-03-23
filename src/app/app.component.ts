@@ -19,14 +19,13 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.ActivatedRoute.params.subscribe(()=>{
 
-      //this.menuCtrl.enable(false);
       this.storage.get('token').then(token=> {
-        //console.log(this.autha.getInfosToken(token));
         var decoded=this.autha.getInfosToken(token);
-        
-         if(decoded){
+          //console.log(decoded);
+          
+            if(decoded){
               this.test=true;
-                 }
+                }
                  else{
                   this.test=false; 
                  }
@@ -36,8 +35,10 @@ export class AppComponent implements OnInit {
   })
     
   }
+
+
   // fonction qui vérifie si un utilisateur est connecté 
-  isLogin(){  
+  isLogin(){    
     return this.test;
   }
 }

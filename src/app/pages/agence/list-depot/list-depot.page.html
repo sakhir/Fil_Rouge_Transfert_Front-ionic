@@ -1,19 +1,21 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>liste des depots</ion-title>
+    <ion-buttons slot="start">
+      <!-- <ion-back-button></ion-back-button> -->
+      <ion-icon name="home" class="menu" (click)="Back()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
 
   <div class="container">
-     <app-header-transaction [depot]=page [src]=src></app-header-transaction>
-  
+
 <div class="ion-padding">
-  <!-- <input
-  type="text"
-  style="padding:8px;margin:15px auto;width:90%;"
-  placeholder="Rechercher par le type "
-  (keyup)="updateFilter($event)"
-/> -->
-   <!-- Theme classes dark, material, bootstrap -->
+
   <ngx-datatable   #myTable
   class="material fullscreen expandable"
-  [limit]="4" 
+  [limit]="6" 
   [rows]="rows" 
   [rowHeight]="60" 
   [columnMode]="'force'" 
@@ -23,11 +25,10 @@
   [scrollbarH]="true"
   (page)="onPage($event)"
     >
-    <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
+    <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow >
       <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
         <div style="padding-left:35px;">
-          <div *ngIf="row.type==false" ><strong>Type</strong> : Dépot </div>
-          <div *ngIf="row.type==true" ><strong>Type</strong> : Retrait </div>
+          <div ><strong>compte</strong> : {{row.compte.nomBeneficiaire}} </div>
         </div>
           </ng-template>
     </ngx-datatable-row-detail>
@@ -51,12 +52,12 @@
   </ngx-datatable-column>
     <ngx-datatable-column name="Date" [width]="100" [draggable]="false">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <div><strong>{{ row.dateEnvoie | date :  "y-MM-d" }}</strong> </div>
+          <div><strong>{{ row.dateDepot | date :  "y-MM-d" }}</strong> </div>
   </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Montant" [width]="100" [draggable]="false">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        <div><strong>{{ row.montantEnvoyer }}</strong> </div>
+        <div><strong>{{ row.montantDepot }}</strong> </div>
 </ng-template>
     </ngx-datatable-column>
    
@@ -76,4 +77,5 @@
 
 </div>  
 </ion-content>
+
 
