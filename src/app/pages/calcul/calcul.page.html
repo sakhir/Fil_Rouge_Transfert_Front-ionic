@@ -1,24 +1,43 @@
 <ion-content>
 
   <div class="container">
-     <app-header-transaction [depot]=page [src]=src></app-header-transaction>
+     <app-header-transaction [depot]=page ></app-header-transaction>
    
  <form class="list-form" [formGroup]="CalculForm">
-  <ion-item no-padding class="animated fadeInUp">
-    <ion-label position="floating">Type de transaction</ion-label>
-    <ion-input  name="type" class="form-control" type="text" value="Depot">  </ion-input>
-   </ion-item>
-   <ion-item no-padding class="animated fadeInUp">
-    <ion-label position="floating">Montant</ion-label>
-    <ion-input  name="montant"  class="form-control" type="number"  [(ngModel)]="calcul.montant" formControlName="mont">  </ion-input>
-   </ion-item>
-   <p  ion-text class="text08" *ngIf="CalculForm.get('mont').touched && CalculForm.get('mont').hasError('required')">
-    <ion-text color="warning">
-      Ce champ est obligatoire
-    </ion-text>
-  </p>
+  <ion-grid>
+
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="2">
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="floating">Type de transaction</ion-label>
+              <ion-input  name="type" class="form-control" type="text" value="Depot">  </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="2">
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">Montant</ion-label>
+                <ion-input  name="montant"  class="form-control" type="number"  [(ngModel)]="calcul.montant" formControlName="mont">  </ion-input>
+              </ion-item>
+              <p  ion-text class="text08" *ngIf="CalculForm.get('mont').touched && CalculForm.get('mont').hasError('required')">
+                <ion-text color="warning">
+                  Ce champ est obligatoire
+                </ion-text>
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="2">
    <ion-button class="but"  expand="block" shape="round" (click)="TrouverTarif()" [disabled]="!CalculForm.valid" > 
     Calculer </ion-button>
+
+  </ion-col>
+</ion-row>
+
+  </ion-grid> 
   </form>
 </div>  
 </ion-content>

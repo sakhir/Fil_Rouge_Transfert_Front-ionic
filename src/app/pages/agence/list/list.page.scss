@@ -60,25 +60,12 @@ ion-grid {
 
 
 }
-//  ion-list {
-// margin-top: 5px;
-  
-//  ion-item {
-//      ion-icon {
-//         color:#F8490C;
-//         font-size: 32px;
-//         ion-label {
-//             margin-left: 5px;
-//         }
 
-//     }
-//   }
-// }
 
 
 ion-card{
-     height: 130px;
-     width:  115px;
+     height: 100%;
+     width:  100%;
     img {
         border-radius: 30%;
         width: 40%;
@@ -109,3 +96,13 @@ ion-card{
     }
 
 }
+
+
+@media screen and (min-width: 800px) {
+    ion-card{
+        height: 100%;
+        width:  50%;
+    }
+   
+  }
+  

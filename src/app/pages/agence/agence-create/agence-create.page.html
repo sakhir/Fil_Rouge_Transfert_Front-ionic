@@ -1,31 +1,48 @@
 <ion-content> 
   <div class="container">
- <div class="haut">
-   <ion-icon class="menu" name="home" (click)="Back()"> </ion-icon>
-    <div class="ion-text-center">
-     <img src="assets/money_logo.png" alt="">
-   </div>
-   <ion-icon name="business-sharp"></ion-icon>
-   <h3 class="text"> Ajout Partenaire</h3>
 
-   <hr>
-</div>
+    <ion-grid>
+  
+      <ion-row>
+         <ion-col size-sm="6" offset-sm="2">
+        <div class="haut">
+          <ion-icon class="menu" name="home" (click)="Back()"> </ion-icon>
+            <div class="ion-text-center">
+            <img src="assets/money_logo.png" alt="">
+          </div>
+          <!-- <ion-icon name="business-sharp"></ion-icon> -->
+          <h3 class="text"> Ajout Partenaire</h3>
 
+          <hr>
+        </div>
+      </ion-col>
+    </ion-row>
+</ion-grid>
     <!--  debut formualire  -->
-    <form [formGroup]="AgenceForm"    >
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-         
-          Ninéa
-        </ion-label>
-        <ion-input color="secondary" type="number" formControlName="nin" name="ninea" [(ngModel)]="registerAgenceData.ninea" ></ion-input>
-      </ion-item>
-      <p ion-text class="text08" *ngIf="AgenceForm.get('nin').touched && AgenceForm.get('nin').hasError('required')">
-        <ion-text color="warning">
-          Ce champ est obligatoire
-        </ion-text>
-      </p>
+    <form [formGroup]="AgenceForm"   >
+      <ion-grid>
 
+        <ion-row>
+            <ion-col size-sm="6" offset-sm="2">
+
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                
+                  Ninéa
+                </ion-label>
+                <ion-input color="secondary" type="number" formControlName="nin" name="ninea" [(ngModel)]="registerAgenceData.ninea" ></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="AgenceForm.get('nin').touched && AgenceForm.get('nin').hasError('required')">
+                <ion-text color="warning">
+                  Ce champ est obligatoire
+                </ion-text>
+              </p>
+            </ion-col>
+          </ion-row>
+
+       
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="2">   
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
          
@@ -38,10 +55,11 @@
           Ce champ est obligatoire
         </ion-text>
       </p>
+    </ion-col>
+  </ion-row>
 
-
-
-
+  <ion-row>
+    <ion-col size-sm="6" offset-sm="2"> 
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
          
@@ -54,6 +72,12 @@
           Ce champs est obligaoire 
         </ion-text>
       </p>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size-sm="6" offset-sm="2"> 
       <ion-item no-padding class="animated fadeInUp">
         <ion-label position="floating">
         
@@ -66,8 +90,11 @@
           Ce champs est obligaoire 
         </ion-text>
       </p>
+    </ion-col>
+  </ion-row>
 
-
+  <ion-row>
+    <ion-col size-sm="6" offset-sm="2"> 
        <div >
         <ion-button  class="enr" expand="block" shape="round"  (click)="registerAgence()" [disabled]="!AgenceForm.valid"
           >     
@@ -77,6 +104,10 @@
   
   
       </div>
+    </ion-col>
+  </ion-row>
+
+    </ion-grid>
     </form>
 
     <!-- fin formulaire  -->

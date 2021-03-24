@@ -7,14 +7,15 @@
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     .menu{
-        color: #51BFD0;
-        margin-top: 20%;
-        font-size:2.5em;
-        position: absolute;
-        margin-left:2px;
+        color: #51bfd0;
+        margin-top: 10%;
+        margin-left: 2%;
+        font-size: 2.5em;
     }
     img{
-        margin-top: 12%;
+      //  margin-top: 12%;
+      width: 30%;
+      height: 40%;
     }
     
     ion-icon{
@@ -39,5 +40,6 @@
       background:#07AEEF ;
       margin-top: 5px;
       border-radius: 30%;
+      margin-left: 30%;
   }
  }

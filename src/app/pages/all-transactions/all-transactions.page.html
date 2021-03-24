@@ -11,6 +11,11 @@
     (keyup)="updateFilter($event)"
   /> -->
      <!-- Theme classes dark, material, bootstrap -->
+
+     <ion-grid>
+
+      <ion-row>
+          <ion-col size-sm="6" offset-sm="2">
     <ngx-datatable   #myTable
     class="material fullscreen expandable"
     [limit]="3" 
@@ -67,6 +72,11 @@
      
       
     </ngx-datatable>
+
+  </ion-col>
+</ion-row>
+
+  </ion-grid> 
   
   </div>
   <!-- <div class="total" >
@@ -74,7 +84,7 @@
   </div> -->
 
   <ion-row>
-    <ion-col size="8" >
+    <ion-col size="8" offset="5"  size-sm="6" offset-sm="5" >
       <ion-chip  outline style="border: solid 1px #FA4A0C">
       <ion-chip  style="background-color: #FA4A0C; color: white" class="chips" >Total</ion-chip>
         <ion-label>{{ t }} FCFA</ion-label>
